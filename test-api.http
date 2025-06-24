@@ -1,0 +1,47 @@
+POST http://localhost:5069/api/auth/register HTTP/1.1
+content-type: application/json
+
+{
+    "indentity" : "andy",
+    "password" : "123456",
+    "confirmPassword" : "123456"
+}
+
+###
+POST http://localhost:5069/api/auth/login HTTP/1.1
+content-type: application/json
+
+{
+    "indentity" : "andy",
+    "password" : "123456"
+}
+
+###
+
+GET http://localhost:5069/api/auth/me HTTP/1.1
+
+###
+POST http://localhost:5069/api/post HTTP/1.1
+content-type: application/json
+
+{
+  "message" : "Hello",
+  "value" : "value"
+}
+
+###
+POST http://localhost:5069/api/comment HTTP/1.1
+Content-Type: application/json
+
+{
+  "message" : "Say hello to comment",
+  "picture" : "pic.png"
+}
+
+###
+POST http://localhost:5069/api/like HTTP/1.1
+Content-Type: application/json
+
+{
+  "action_type" : "LIKE"
+}
