@@ -1,7 +1,9 @@
 {
   "dependencies": {
+    "@prisma/client": "^6.10.1",
     "dotenv": "^16.5.0",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "prisma": "^6.10.1"
   },
   "name": "cc20_fakebook",
   "version": "1.0.0",
