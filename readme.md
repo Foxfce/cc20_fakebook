@@ -11,8 +11,8 @@ JWT_SECRET = "FakeBooK_ProJecT"
 
 |path |method |authen |params |query |body |
 |:-- |:-- |:-- |:-- |:-- |:-- |
-|/api/auth/login |post |- |- |-|{indentity, password}
-|/api/auth/register |post |- |- |-|{indentity, firstName, lastName, password, confirmPassword}
+|/api/auth/login |post |- |- |-|{identity, password}
+|/api/auth/register |post |- |- |-|{identity, firstName, lastName, password, confirmPassword}
 |/api/auth/me|get|y|-|-|-|
 |/api/post|get|y|-|-|-|
 |/api/post|post|y|-|-|{message, image(file)}
