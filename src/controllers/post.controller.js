@@ -2,20 +2,25 @@ import fs from 'fs/promises';
 import cloudinary from "../config/cloudinary.config.js";
 import path from 'path';
 import prisma from '../config/prisma.client.js';
+import createError from '../utils/create-error.util.js';
 
 export const getAllPost = async (req, res, next) => {
   try {
     const resp = await prisma.post.findMany({
-      orderBy : {createdAt : 'desc'},
-      include : {
-        user : { select : {
-          firstName: true,
-          lastName: true,
-          profileImage: true
-        }}
+      orderBy: { createdAt: 'desc' },
+      include: {
+        user: {
+          select: {
+            firstName: true,
+            lastName: true,
+            profileImage: true
+          }
+        },
+        comments: true,
+        likes: true,
       }
     })
-    res.json({ posts : resp });
+    res.json({ posts: resp });
   } catch (error) {
     next(error);
 
@@ -42,15 +47,15 @@ export const createPost = async (req, res, next) => {
     // console.log(uploadResult);
     const data = {
       message: message,
-      image : uploadResult?.secure_url || '',
+      image: uploadResult?.secure_url || '',
       userId: req.user.id
     }
 
-    const rs = await prisma.post.create({data});
+    const rs = await prisma.post.create({ data });
 
     res.status(201).json({
       message: 'Create Post Succesfully',
-      data: rs,
+      result: rs,
     });
   } catch (error) {
     next(error);
@@ -68,7 +73,24 @@ export const updatePost = async (req, res, next) => {
 
 export const deletePost = async (req, res, next) => {
   try {
-    res.json({ message: 'Delete posts' });
+    const { id } = req.params;
+
+    const foundPost = await prisma.post.findUnique({
+      where: { id: +id }
+    })
+    if (!foundPost) {
+      createError(400, 'ID not found')
+    }
+
+    if (req.user.id != foundPost.userId) {
+      createError(400, 'Unauthorized permission')
+    }
+
+    // console.log(req.user.id);
+    // console.log(foundPost);
+
+    const rs = await prisma.post.delete({ where: { id: +id } })
+    res.json({ message: 'Delete posts', result: rs });
 
   } catch (error) {
     next(error);
