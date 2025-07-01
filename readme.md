@@ -19,7 +19,7 @@ CLOUDINARY_API_SECRET
 |/api/auth/me|get|y|-|-|-|
 |/api/post|get|y|-|-|-|
 |/api/post|post|y|-|-|{message, image(file)}
-|/api/post|put|y|:id|-|{message, image(file)}
+|/api/post|put|y|:id|-|{message, image(file),removePic}
 |/api/post|delete|y|:id|-|-
 |/api/comment|post|y|-|-|{message, postId}
 |/api/like|post|y|-|-|{postId}

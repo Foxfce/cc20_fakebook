@@ -64,6 +64,34 @@ export const createPost = async (req, res, next) => {
 
 export const updatePost = async (req, res, next) => {
   try {
+    const { id } = req.params;
+    const {message, removePic} = req.body;
+
+    const foundPost = await prisma.post.findUnique({
+      where: { id: +id }
+    })
+
+    if (!foundPost || req.user.id !== foundPost.userId) {
+      createError(400, 'Cannot edit this post')
+    }
+    const haveFile = !!req.file
+    let uploadResult
+    if (haveFile) {
+      uploadResult = await cloudinary.uploader.upload(req.file.path, {
+        overwrite: true,
+        public_id: path.parse(req.file.path).name
+      })
+      fs.unlink(req.file.path);
+    }
+
+    const data = haveFile
+      ? { message, userId: req.user.id, image: uploadResult.secure_url }
+      : { message, userId: req.user.id, image: removePic? '': foundPost.image }
+
+    const rs = await prisma.post.update({
+      where: { id: +id },
+      data : data,
+    })
     res.json({ message: 'Edit posts' });
 
   } catch (error) {
