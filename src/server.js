@@ -1,6 +1,5 @@
 import dotenv from 'dotenv';
 import app from './app.js';
-import prisma from './config/prisma.client.js';
 import shutdown from './utils/shutdown.util.js';
 
 // Call function to read variable in .env

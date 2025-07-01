@@ -2,9 +2,14 @@
   "dependencies": {
     "@prisma/client": "^6.10.1",
     "bcryptjs": "^3.0.2",
+    "cloudinary": "^2.7.0",
+    "cors": "^2.8.5",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
-    "prisma": "^6.10.1"
+    "jsonwebtoken": "^9.0.2",
+    "multer": "^2.0.1",
+    "prisma": "^6.10.1",
+    "yup": "^1.6.1"
   },
   "name": "cc20_fakebook",
   "version": "1.0.0",
@@ -13,8 +18,8 @@
     "dev": "node --watch src/server.js",
     "start": "node --watch src/server.js"
   },
-  "prisma" : {
-    "seed" : "node prisma/seed.js"
+  "prisma": {
+    "seed": "node prisma/seed.js"
   },
   "type": "module",
   "keywords": [],

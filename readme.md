@@ -4,7 +4,10 @@ CC20-Fakebook-API
 ### env guide 
 PORT = 8899  
 DATABASE_URL = ***  
-JWT_SECRET = "FakeBooK_ProJecT"  
+JWT_SECRET
+CLOUDINARY_NAME
+CLOUDINARY_API_KEY
+CLOUDINARY_API_SECRET
 
 --- 
 ### service

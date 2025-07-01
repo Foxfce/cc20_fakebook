@@ -1,33 +1,57 @@
+# Register API
 POST http://localhost:5069/api/auth/register HTTP/1.1
 content-type: application/json
 
 {
-    "indentity" : "andy",
+    "email" : "luffy@luffy.com",
+    "mobile" : "6666666666",
+    "firstName": "Luffy",
+    "lastName" : "Monkey D",
     "password" : "123456",
     "confirmPassword" : "123456"
 }
 
 ###
+# Login API
 POST http://localhost:5069/api/auth/login HTTP/1.1
 content-type: application/json
 
 {
-    "indentity" : "andy",
+    "identity" : "luffy@luffy.com",
     "password" : "123456"
 }
 
 ###
-
+# Get Me
 GET http://localhost:5069/api/auth/me HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiZmlyc3ROYW1lIjoiTHVmZnkiLCJsYXN0TmFtZSI6Ik1vbmtleSBEIiwiaWF0IjoxNzUwOTA5MDE1LCJleHAiOjE3NTIyMDUwMTV9.cgqonc0ZwwSyMNdIhyay6d3DANxynOtfjaCLfZzcIuI
 
 ###
+# Get All Post
+GET http://localhost:5069/api/post HTTP/1.1
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OCwiZmlyc3ROYW1lIjoiTHVmZnkiLCJsYXN0TmFtZSI6Ik1vbmtleSBEIiwiaWF0IjoxNzUwOTA5MDE1LCJleHAiOjE3NTIyMDUwMTV9.cgqonc0ZwwSyMNdIhyay6d3DANxynOtfjaCLfZzcIuI
+
+###
+# Post comment
 POST http://localhost:5069/api/post HTTP/1.1
+content-type: application/multipart/form-data
+
+{
+  "message" : "Hello",
+  "value" : "value"
+}
+###
+# Update comment
+PUT http://localhost:5069/api/post HTTP/1.1
 content-type: application/json
 
 {
   "message" : "Hello",
   "value" : "value"
 }
+###
+# Delete comment
+DELETE  http://localhost:5069/api/post HTTP/1.1
 
 ###
 POST http://localhost:5069/api/comment HTTP/1.1

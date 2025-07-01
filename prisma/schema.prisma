@@ -24,7 +24,7 @@ model User {
   profileImage String?
   CoverImage   String?
   createAt     DateTime       @default(now())
-  updtaeAt     DateTime       @default(now()) @updatedAt
+  updatedAt     DateTime       @default(now()) @updatedAt
   posts        Post[]
   comments     Comment[]
   likes        Like[]
