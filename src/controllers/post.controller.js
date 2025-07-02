@@ -16,7 +16,16 @@ export const getAllPost = async (req, res, next) => {
             profileImage: true
           }
         },
-        comments: true,
+        comments: {
+          include: {
+            user: {
+              select: {
+                firstName: true,
+                lastName: true,
+                profileImage: true
+              }}
+          },
+        },
         likes: true,
       }
     })
@@ -65,7 +74,7 @@ export const createPost = async (req, res, next) => {
 export const updatePost = async (req, res, next) => {
   try {
     const { id } = req.params;
-    const {message, removePic} = req.body;
+    const { message, removePic } = req.body;
 
     const foundPost = await prisma.post.findUnique({
       where: { id: +id }
@@ -86,11 +95,11 @@ export const updatePost = async (req, res, next) => {
 
     const data = haveFile
       ? { message, userId: req.user.id, image: uploadResult.secure_url }
-      : { message, userId: req.user.id, image: removePic? '': foundPost.image }
+      : { message, userId: req.user.id, image: removePic ? '' : foundPost.image }
 
     const rs = await prisma.post.update({
       where: { id: +id },
-      data : data,
+      data: data,
     })
     res.json({ message: 'Edit posts' });
 
