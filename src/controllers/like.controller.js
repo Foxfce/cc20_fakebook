@@ -19,13 +19,13 @@ export async function createLike(req, res, next) {
 
 }
 
-export async function deleteLike(req, res, next){
-  const {id} = req.params //postId
+export async function deleteLike(req, res, next) {
+  const { id } = req.params //postId
   const rs = await prisma.like.delete({
     where: {
-      userId_postId:{
-        userId : req.user.id,
-        postId: +id
+      userId_postId: {
+        userId: req.user.id,
+        postId: +id,
       }
     }
   })
